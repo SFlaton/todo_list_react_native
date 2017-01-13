@@ -10,7 +10,6 @@ class TodoCreate extends Component {
   onPressSave() {
     axios.post('http://localhost:3000/tasks', { title: this.state.title })
       .then(Actions.todoList({ type: 'reset' }))
-
   }
 
   render() {
