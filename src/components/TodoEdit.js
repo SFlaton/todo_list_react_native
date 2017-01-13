@@ -10,11 +10,6 @@ class TodoEdit extends Component {
       .then(Actions.todoList())
   }
 
-  onChangeCompleted() {
-    if (this.props.completed === true )
-
-  }
-
   render() {
     return (
       <Card>
