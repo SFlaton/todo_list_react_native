@@ -5,16 +5,32 @@ import axios from 'axios';
 import { Card, CardSection, Input, Button } from './common';
 
 class TodoEdit extends Component {
+  state = { title: this.props.todo }
+
   onPressDelete() {
     axios.delete(`http://localhost:3000/tasks/${this.props.id}`)
-      .then(Actions.todoList())
+      .then(Actions.todoList({ type: 'reset' }))
+  }
+
+  onPressUpdate() {
+    axios.put(`http://localhost:3000/tasks/${this.props.id}`, {task: { title: this.state.title }})
+      .then(Actions.todoList({ type: 'reset' }))
   }
 
   render() {
+    console.log(JSON.stringify(this.state.title))
+
     return (
       <Card>
         <CardSection>
-          <Text style={styles.cardSectionTextStyle}>{this.props.todo}</Text>
+          <Input
+            value={this.state.title}
+            onChangeText={title => this.setState({ title })}
+          />
+        </CardSection>
+
+        <CardSection>
+          <Button onPress={this.onPressUpdate.bind(this)}>Update Task</Button>
         </CardSection>
 
         <CardSection>

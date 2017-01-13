@@ -9,7 +9,7 @@ class TodoCreate extends Component {
 
   onPressSave() {
     axios.post('http://localhost:3000/tasks', { title: this.state.title })
-      .then(Actions.todoList())
+      .then(Actions.todoList({ type: 'reset' }))
 
   }
 
@@ -20,8 +20,7 @@ class TodoCreate extends Component {
       <Card>
         <CardSection>
           <Input
-            label="New Task"
-            placeholder="..."
+            placeholder="New Task"
             value={this.state.title}
             onChangeText={title => this.setState({ title })}
           />
