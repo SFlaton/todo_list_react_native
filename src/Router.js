@@ -2,6 +2,7 @@ import React from 'React';
 import {Scene, Router, Actions} from 'react-native-router-flux';
 import TodoList from './components/TodoList';
 import TodoCreate from './components/TodoCreate';
+import TodoEdit from './components/TodoEdit';
 
 const RouterComponent = () => {
   return (
@@ -16,6 +17,7 @@ const RouterComponent = () => {
           initial
         />
         <Scene key="todoCreate" component={TodoCreate} title="Create Task" />
+        <Scene key="todoEdit" component={TodoEdit} title="Edit Task" passProps />
       </Scene>
     </Router>
   )
