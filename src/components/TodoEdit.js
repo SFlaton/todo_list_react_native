@@ -4,9 +4,13 @@ import { Actions } from 'react-native-router-flux';
 import axios from 'axios';
 import CheckBox from 'react-native-check-box';
 import { Card, CardSection, Input, Button } from './common';
+import ListItem from './ListItem';
 
 class TodoEdit extends Component {
-  state = { title: this.props.todo, completed: this.props.completed }
+  constructor(props) {
+    super(props)
+    this.state = { title: this.props.todo, completed: this.props.completed }
+  }
 
   onPressDelete() {
     axios.delete(`http://localhost:3000/tasks/${this.props.id}`)
@@ -14,8 +18,9 @@ class TodoEdit extends Component {
   }
 
   onPressUpdate() {
+    console.log(this.props.todo)
     axios.put(`http://localhost:3000/tasks/${this.props.id}`, {task: { title: this.state.title, completed: this.state.completed }})
-      .then(Actions.todoList({ type: 'reset' }))
+      .then(Actions.listItem({ type: 'reset', todo: this.state.title, completed: this.state.completed }))
   }
 
   onClick() {
@@ -27,7 +32,7 @@ class TodoEdit extends Component {
   }
 
   render() {
-    console.log(this.state)
+    // console.log(this.state)
 
     return (
       <Card>
