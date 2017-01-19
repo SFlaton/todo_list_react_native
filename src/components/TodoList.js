@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Text, View, ScrollView, TouchableOpacity } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import axios from 'axios';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import { Card, CardSection, Button } from './common';
 import ListItem from './ListItem';
 
@@ -18,18 +19,20 @@ class TodoList extends Component {
   }
 
   renderList() {
+    const check = (<Icon name="check" size={30} color="#028c09" />)
+
     return this.state.list.map(task =>
       <TouchableOpacity key={task.id} onPress={() => Actions.todoEdit({id: task.id, todo: task.title, completed: task.completed})}>
         <Card>
           <View style={styles.flexRow}>
-            <CardSection style={[styles.flex3, task.completed ? styles.textStyleCompleted : styles.textStyleInProgress]}>
+            <CardSection style={[styles.flex4, task.completed ? styles.textStyleCompleted : styles.textStyleInProgress]}>
               <Text>
                 {task.title}
               </Text>
             </CardSection>
             <CardSection style={[styles.flex1, task.completed ? styles.textStyleCompleted : styles.textStyleInProgress]}>
               <Text>
-                {task.completed ? 'Completed!' : ''}
+                {task.completed ? check : ''}
               </Text>
             </CardSection>
           </View>
@@ -41,7 +44,6 @@ class TodoList extends Component {
 
   render() {
     // console.log(this.state);
-
     return (
       <ScrollView>
         { this.renderList() }
@@ -60,8 +62,8 @@ const styles = {
   flexRow: {
     flexDirection: 'row'
   },
-  flex3: {
-    flex: 3
+  flex4: {
+    flex: 4
   },
   flex1: {
     flex: 1
